@@ -16,32 +16,36 @@ function App() {
       <h1>Full Name Display</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>First Name : </label>
+          <label htmlFor="fname">First Name : </label>
           <input
+            type="text"
             required
             name="firstname"
             id="fname"
+            value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
         <div>
-          <label>Last Name : </label>
+          <label htmlFor="lname">Last Name : </label>
           <input
+            type="text"
             required
             name="lastname"
             id="lname"
+            value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
 
       <div>
-        {showText ? (
+        {showText && (
           <p>
             Full Name : {firstName} {lastName}
           </p>
-        ) : null}
+        )}
       </div>
     </div>
   );
