@@ -5,10 +5,17 @@ function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [showText, setShowText] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowText(true);
+    if (firstName === "" || lastName === "") {
+      setError("Both fields are required.");
+      setShowText(false);
+    } else {
+      setShowText(true);
+      setError("");
+    }
   };
 
   return (
@@ -39,6 +46,8 @@ function App() {
         </div>
         <button type="submit">Submit</button>
       </form>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <div>
         {showText && (
