@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [fullName, setfullName] = useState("");
   const [showText, setShowText] = useState(false);
   const [error, setError] = useState("");
 
@@ -14,6 +15,7 @@ function App() {
       setShowText(false);
     } else {
       setShowText(true);
+      setfullName(`${firstName} ${lastName}`);
       setError("");
     }
   };
@@ -49,13 +51,7 @@ function App() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <div>
-        {showText && (
-          <p>
-            Full Name : {firstName} {lastName}
-          </p>
-        )}
-      </div>
+      <div>{showText && <p>Full Name : {fullName}</p>}</div>
     </div>
   );
 }
