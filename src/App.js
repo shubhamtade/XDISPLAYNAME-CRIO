@@ -4,20 +4,20 @@ import "./App.css";
 function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [fullName, setfullName] = useState("");
-  const [showText, setShowText] = useState(false);
+  const [fullName, setFullName] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (firstName === "" || lastName === "") {
+
+    if (!firstName.trim() || !lastName.trim()) {
       setError("Both fields are required.");
-      setShowText(false);
-    } else {
-      setShowText(true);
-      setfullName(`${firstName} ${lastName}`);
-      setError("");
+      setFullName(""); // Ensure full name is not displayed when error exists
+      return;
     }
+
+    setFullName(`${firstName.trim()} ${lastName.trim()}`);
+    setError(""); // Clear error if submission is valid
   };
 
   return (
@@ -25,10 +25,9 @@ function App() {
       <h1>Full Name Display</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="fname">First Name : </label>
+          <label htmlFor="fname">First Name: </label>
           <input
             type="text"
-            required
             name="firstname"
             id="fname"
             value={firstName}
@@ -36,10 +35,9 @@ function App() {
           />
         </div>
         <div>
-          <label htmlFor="lname">Last Name : </label>
+          <label htmlFor="lname">Last Name: </label>
           <input
             type="text"
-            required
             name="lastname"
             id="lname"
             value={lastName}
@@ -49,9 +47,8 @@ function App() {
         <button type="submit">Submit</button>
       </form>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      <div>{showText && <p>Full Name : {fullName}</p>}</div>
+      {error && <p id="error-message" style={{ color: "red" }}>{error}</p>}
+      {fullName && <p>Full Name : {fullName}</p>}
     </div>
   );
 }
